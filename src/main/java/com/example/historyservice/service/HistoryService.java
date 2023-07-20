@@ -4,6 +4,8 @@ import com.example.historyservice.dao.HistoryDao;
 import com.example.historyservice.domain.History;
 import com.example.historyservice.dto.HistoryRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -27,9 +29,8 @@ public class HistoryService {
 
     @Transactional
     public void add(HistoryRequest request) {
-        //TODO: spring security
-        //TODO: get userId from token
-        Integer userId = 1;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Long userId = (Long) authentication.getPrincipal();
 
         History history = History.builder()
                 .userId(userId)

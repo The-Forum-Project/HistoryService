@@ -22,7 +22,7 @@ public class History {
     private Integer historyId;
 
     @Column(name = "user_id")
-    private Integer userId;
+    private Long userId;
 
     @Column(name = "post_id")
     private Integer postId;

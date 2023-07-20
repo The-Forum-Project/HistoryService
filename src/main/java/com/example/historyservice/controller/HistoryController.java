@@ -1,9 +1,11 @@
 package com.example.historyservice.controller;
 
 import com.example.historyservice.domain.History;
+import com.example.historyservice.dto.GeneralResponse;
 import com.example.historyservice.dto.HistoryRequest;
 import com.example.historyservice.service.HistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +28,8 @@ public class HistoryController {
     }
 
     @PostMapping("/histories")
-    public void addHistory(@Valid @RequestBody HistoryRequest request){
+    public ResponseEntity<GeneralResponse> addHistory(@Valid @RequestBody HistoryRequest request){
         historyService.add(request);
+        return ResponseEntity.ok(GeneralResponse.builder().statusCode("200").message("success add").build());
     }
 }
