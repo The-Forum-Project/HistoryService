@@ -14,5 +14,5 @@ import java.util.Date;
 @NoArgsConstructor
 public class HistoryRequest {
     @NotNull
-    private Integer postId;
+    private String postId;
 }

@@ -25,7 +25,7 @@ public class History {
     private Long userId;
 
     @Column(name = "post_id")
-    private Integer postId;
+    private String postId;
 
     @Column(name = "view_date")
     private Date viewDate;
