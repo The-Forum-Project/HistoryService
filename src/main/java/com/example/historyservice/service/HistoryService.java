@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -23,8 +24,10 @@ public class HistoryService {
 
     @Transactional
     public List<History> getAll() {
-        //TODO: add filter by words or date [Bonus]
-        return historyDao.getAll();
+        //TODO : add filter by words or date [Bonus]
+        List<History> all = historyDao.getAll();
+        Collections.reverse(all);
+        return all;
     }
 
     @Transactional
