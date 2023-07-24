@@ -23,8 +23,8 @@ public class HistoryController {
     }
 
     @GetMapping("/histories")
-    public List<History> getAllHistories(){
-        return historyService.getAll();
+    public List<History> getAllHistoriesByUserId(){
+        return historyService.getAllByUserId();
     }
 
     @PostMapping("/histories")

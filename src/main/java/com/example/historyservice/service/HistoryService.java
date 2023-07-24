@@ -23,9 +23,11 @@ public class HistoryService {
     }
 
     @Transactional
-    public List<History> getAll() {
+    public List<History> getAllByUserId() {
         //TODO : add filter by words or date [Bonus]
-        List<History> all = historyDao.getAll();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Long userId = (Long) authentication.getPrincipal();
+        List<History> all = historyDao.getAllByUserId(userId);
         Collections.reverse(all);
         return all;
     }

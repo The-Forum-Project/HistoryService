@@ -25,10 +25,11 @@ public class HistoryDao {
         getCurrentSession().save(history);
     }
 
-    public List<History> getAll() {
+    public List<History> getAllByUserId(Long userId) {
         Session session = getCurrentSession();
-        String sql = "FROM History";
+        String sql = "FROM History WHERE userId = :userId";
         Query<History> query = session.createQuery(sql, History.class);
+        query.setParameter("userId", userId);
         return query.getResultList();
     }
 }
