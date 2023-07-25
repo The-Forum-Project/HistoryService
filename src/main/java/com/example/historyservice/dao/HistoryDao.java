@@ -27,7 +27,7 @@ public class HistoryDao {
 
     public List<History> getAllByUserId(Long userId) {
         Session session = getCurrentSession();
-        String sql = "FROM History WHERE userId = :userId";
+        String sql = "FROM History WHERE userId = :userId ORDER BY viewDate DESC";
         Query<History> query = session.createQuery(sql, History.class);
         query.setParameter("userId", userId);
         return query.getResultList();

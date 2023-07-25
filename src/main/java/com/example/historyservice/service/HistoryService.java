@@ -28,7 +28,6 @@ public class HistoryService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Long userId = (Long) authentication.getPrincipal();
         List<History> all = historyDao.getAllByUserId(userId);
-        Collections.reverse(all);
         return all;
     }
 
@@ -36,6 +35,15 @@ public class HistoryService {
     public void add(HistoryRequest request) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Long userId = (Long) authentication.getPrincipal();
+
+        List<History> histories = historyDao.getAllByUserId(userId);
+        if (!histories.isEmpty()) {
+            History lastHistory = histories.get(0);
+            if (lastHistory.getPostId().equals(request.getPostId())) {
+                // If the last history has the same postId, do not add a new history
+                return;
+            }
+        }
 
         History history = History.builder()
                 .userId(userId)
